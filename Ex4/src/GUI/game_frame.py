@@ -149,33 +149,6 @@ def draw_agent(agents, graph):
     """
         This function responsible only to draw the agents
     """
-    for agent in agents.values():
-        x = ap_my_scale(agent.get_pos()[0], graph, x=True)
-        y = ap_my_scale(agent.get_pos()[1], graph, y=True)
-        pygame.draw.circle(screen, Color(122, 61, 23), (x, y), 10)
-
-
-def draw_pokemon(pokemons, graph):
-    """
-        This function responsible only to draw the pokemons
-    """
-    for p in pokemons.values():
-        x = ap_my_scale(p.get_pos()[0], graph, x=True)
-        y = ap_my_scale(p.get_pos()[1], graph, y=True)
-        pygame.draw.circle(screen, Color(0, 255, 255), (x, y), 10)
-
-
-def ap_scale(data, min_screen, max_screen, min_data, max_data):
-    """
-    get the scaled data with proportions min_data, max_data
-    relative to min and max screen dimentions
-    """
-    return ((float(data) - min_data) / (max_data-min_data)) * (max_screen - min_screen) + min_screen
-
-
-# decorate scale with the correct values
-
-def ap_my_scale(data, graph, x=False, y=False):
     list_of_nodes: {int: tuple} = {}
     for node in graph.get_graph().get_all_v().keys():
         list_of_nodes[node] = graph.get_graph().get_all_v()[node].get_location()
@@ -188,11 +161,34 @@ def ap_my_scale(data, graph, x=False, y=False):
     min_y = min(list(list_of_y))
     max_x = max(list(list_of_x))
     max_y = max(list(list_of_y))
-    if x:
-        return ap_scale(data, 50, screen.get_width() - 50, min_x, max_x)
-    if y:
-        return ap_scale(data, 50, screen.get_height()-50, min_y, max_y)
 
+    for agent in agents.values():
+        x = _my_scale(float(agent.get_pos()[0]), min_x, max_x, min_y, max_y, x=True)
+        y = _my_scale(float(agent.get_pos()[1]), min_x, max_x, min_y, max_y, y=True)
+        pygame.draw.circle(screen, Color(122, 61, 23), (x, y), radius=10)
+
+
+def draw_pokemon(pokemons, graph):
+    """
+        This function responsible only to draw the pokemons
+    """
+    list_of_nodes: {int: tuple} = {}
+    for node in graph.get_graph().get_all_v().keys():
+        list_of_nodes[node] = graph.get_graph().get_all_v()[node].get_location()
+    list_of_x = []
+    list_of_y = []
+    for pos in list_of_nodes.values():
+        list_of_y.append(pos[1])
+        list_of_x.append(pos[0])
+    min_x = min(list(list_of_x))
+    min_y = min(list(list_of_y))
+    max_x = max(list(list_of_x))
+    max_y = max(list(list_of_y))
+
+    for p in pokemons.values():
+        x = _my_scale(float(p.get_pos()[0]), min_x, max_x, min_y, max_y, x=True)
+        y = _my_scale(float(p.get_pos()[1]), min_x, max_x, min_y, max_y, y=True)
+        pygame.draw.circle(screen, Color(45, 66, 66), (x, y), radius=10)
 
 # if __name__ == '__main__':
 #     graph = GraphAlgo()
