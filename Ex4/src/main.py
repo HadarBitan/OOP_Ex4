@@ -28,11 +28,9 @@ moves = 0
 client.add_agent("{\"id\":0}")
 client.start()
 count = 0
-print("bye")
 while client.is_running() == 'true':
     agents = load_agents()
     pokemons = load_pokemon()
-    print("hi")
     if count == 0:
         algorithms.first_init(agents_list=agents, pokemons_list=pokemons, pokemon_check=pokemon_check)
         count += 1
