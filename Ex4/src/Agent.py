@@ -23,7 +23,7 @@ class Agent(threading.Thread):
         self._src: int = src
         self._dest: int = dest
         self._speed: float = speed
-        self._pos: tuple = pos
+        self._pos: tuple = (float(pos[0]), float(pos[1]), float(pos[2]))
         self._pokemon = None
         self.sum_moves = 0
         self._client = client
