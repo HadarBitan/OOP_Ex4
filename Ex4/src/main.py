@@ -18,13 +18,13 @@ graph_json = client.get_graph()
 graph = GraphAlgo()
 graph.load_from_json(graph_json)
 
-draw_Frame(graph)
 
 pokemons = load_pokemon()
 pokemon_check: dict = dict.fromkeys(pokemons.keys(), False)
 
 points = 0
 moves = 0
+draw_Frame(graph, moves, points, client.time_to_end())
 client.add_agent("{\"id\":0}")
 client.start()
 count = 0
@@ -34,8 +34,6 @@ while client.is_running() == 'true':
     if count == 0:
         algorithms.first_init(agents_list=agents, pokemons_list=pokemons, pokemon_check=pokemon_check)
         count += 1
-    draw_points(points)
-    draw_moves(moves)
     draw_agent(agents=agents)
     draw_pokemon(pokemons)
     algorithms.place_agent(agents_list=agents, pokemons_list=pokemons, pokemon_check=pokemon_check)

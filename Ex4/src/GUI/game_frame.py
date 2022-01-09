@@ -14,9 +14,12 @@ clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), depth=32, flags=RESIZABLE)
 screen.fill(pygame.Color(40, 80, 100))
+backg = pygame.image.load("C:\\Users\hadar\OneDrive - Ariel University\Desktop\Ex4\img\\background.jpg")
+backg = pygame.transform.scale(backg, (screen.get_width(), screen.get_height()))
+screen.blit(backg, (0, 0))
 
 
-def draw_Frame(graph: GraphAlgo):
+def draw_Frame(graph: GraphAlgo, moves, points, time):
     """
     The function drawing the basic frame, aka the graph and the stop button
     those items don't change the entire game.
@@ -30,9 +33,14 @@ def draw_Frame(graph: GraphAlgo):
                 exit(0)
             _draw_graph(graph)
             draw_button("STOP")
+            draw_moves(moves)
+            draw_points(points)
+            draw_time_to_end(time)
             clock.tick(60)
             pygame.display.flip()
-            screen.fill(pygame.Color(40, 80, 100))
+            backg = pygame.image.load("C:\\Users\hadar\OneDrive - Ariel University\Desktop\Ex4\img\\background.jpg")
+            backg = pygame.transform.scale(backg, (screen.get_width(), screen.get_height()))
+            screen.blit(backg, (0, 0))
 
 
 def draw_button(title: str):
@@ -68,7 +76,7 @@ def draw_moves(moves):
         This function responsible only to draw the overall points
     """
     point_srf = FONT_ele.render("moves = " + str(moves), True, pygame.Color(0, 0, 0))
-    point_rect = point_srf.get_rect(center=(90, 70))
+    point_rect = point_srf.get_rect(center=(50, 70))
     screen.blit(point_srf, point_rect)
 
 
