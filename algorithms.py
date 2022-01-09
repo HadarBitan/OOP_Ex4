@@ -18,7 +18,6 @@ def first_init(agents_list: dict, pokemons_list: dict, pokemon_check: dict):
         while True:
             if not pokemon_check[index]:
                 posOfPoke: tuple = pokemons_list[index].get_pos()
-                print(pokemons_list[index]._edge)
                 src, dest = pokemons_list[index].get_edge()
                 agents_list[id_agent].set_pos(posOfPoke)
                 agents_list[id_agent].set_src(src)

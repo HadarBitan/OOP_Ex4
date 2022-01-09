@@ -21,4 +21,4 @@ class Point3D:
         dx = self._x - other.get_x()
         dy = self._y - other.get_y()
         dz = self._z - other.get_z()
-        return math.sqrt(math.pow(dx, 2) + math.pow(dy, 2) + math.pow(dz, 2))
+        return round(math.sqrt(math.pow(dx, 2) + math.pow(dy, 2) + math.pow(dz, 2)), 5)

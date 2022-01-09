@@ -1,8 +1,11 @@
-import algorithms
+import json
+from types import SimpleNamespace
+
+from src.algorithms import *
 from src.Graph.GraphAlgo import GraphAlgo
-from client import Client
-from src.GUI.game_frame import draw_Frame, draw_points, draw_agent, draw_pokemon, draw_moves
-from load import load_agents, load_pokemon
+from src.client import Client
+from src.GUI.game_frame import draw_Frame
+from src.load import load_agents, load_pokemon
 
 
 # default port
@@ -18,13 +21,12 @@ graph_json = client.get_graph()
 graph = GraphAlgo()
 graph.load_from_json(graph_json)
 
-
-pokemons = load_pokemon()
+pokemons_json = json.loads(client.get_pokemons(), object_hook=lambda d: SimpleNamespace(**d)).Pokemons
+pokemons = load_pokemon(pokemons_json, graph=graph)
 pokemon_check: dict = dict.fromkeys(pokemons.keys(), False)
 
 points = 0
 moves = 0
-draw_Frame(graph, moves, points, client.time_to_end())
 client.add_agent("{\"id\":0}")
 client.add_agent("{\"id\":1}")
 client.add_agent("{\"id\":2}")
@@ -32,15 +34,17 @@ client.add_agent("{\"id\":3}")
 client.start()
 count = 0
 while client.is_running() == 'true':
-    agents = load_agents()
-    pokemons = load_pokemon()
+    pokemons_json = json.loads(client.get_pokemons(), object_hook=lambda d: SimpleNamespace(**d)).Pokemons
+    agents_json = json.loads(client.get_agents(), object_hook=lambda d: SimpleNamespace(**d)).Agents
+    agents = load_agents(agents_json, client)
+    pokemons = load_pokemon(pokemons_json, graph=graph)
     if count == 0:
-        algorithms.first_init(agents_list=agents, pokemons_list=pokemons, pokemon_check=pokemon_check)
+        first_init(agents_list=agents, pokemons_list=pokemons, pokemon_check=pokemon_check)
         count += 1
-    draw_agent(agents=agents)
-    draw_pokemon(pokemons)
-    algorithms.place_agent(agents_list=agents, pokemons_list=pokemons, pokemon_check=pokemon_check)
-    algorithms.catch_pokemons(agents_list=agents)
+    else:
+        place_agent(agents_list=agents, pokemons_list=pokemons, pokemon_check=pokemon_check)
+    draw_Frame(graph, moves, points, client.time_to_end(), agents, pokemons)
+    catch_pokemons(agents_list=agents)
     for agent in agents:
         points += agent.get_value()
         moves += agent.sum_moves

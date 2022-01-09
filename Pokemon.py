@@ -60,7 +60,6 @@ class Pokemon:
             src = Point3D(srcPos[0], srcPos[1], srcPos[2])
             dest = Point3D(destPos[0], destPos[1], destPos[2])
             point_self = Point3D(self._pos[0], self._pos[1], self._pos[2])
-            print(src.distance(point_self), "  ", point_self.distance(dest), "  ", src.distance(dest))
             if (src.distance(point_self) + point_self.distance(dest)) == src.distance(dest):
                 if ((edge[0] < edge[1]) and (self._type > 0)) or ((edge[0] > edge[1]) and (self._type < 0)):
                     self._edge = edge

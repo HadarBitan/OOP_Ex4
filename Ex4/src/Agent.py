@@ -1,6 +1,5 @@
-import main
 from src.Graph.Point3D import Point3D
-from Pokemon import Pokemon
+from src.Pokemon import Pokemon
 import threading
 
 
@@ -17,7 +16,7 @@ class Agent(threading.Thread):
     pos -> a 3 dimensional point represent the current position of the agent
     """
 
-    def __init__(self, agent_id: int, value: float, src: int, dest: int, speed: float, pos: tuple):
+    def __init__(self, agent_id: int, value: float, src: int, dest: int, speed: float, pos: tuple, client):
         threading.Thread.__init__(self)
         self._id: int = agent_id
         self._value: float = value
@@ -27,6 +26,7 @@ class Agent(threading.Thread):
         self._pos: tuple = pos
         self._pokemon = None
         self.sum_moves = 0
+        self._client = client
 
     def get_id(self) -> int:
         return self._id
@@ -93,12 +93,14 @@ class Agent(threading.Thread):
         EPS = 0.0000001
         while True:
             # sent the client to the dest of the edge of the pokemon
-            main.client.choose_next_edge(
+            self._client.choose_next_edge(
                 '{"agent_id":' + str(self._id) + ', "next_node_id":' + str(self._pokemon.get_edge()[1]) + '}')
             # only when the agent is very close to the pokemon act
-            if self._pos.distance(self._pokemon.get_pos()) <= EPS:
+            point_pok = Point3D(self._pokemon.get_pos()[0], self._pokemon.get_pos()[1], self._pokemon.get_pos()[2])
+            point_self = Point3D(self._pos[0], self._pos[1], self._pos[2])
+            if point_self.distance(point_pok) <= EPS:
                 # final move to catch the pokemon
-                main.client.move()
+                self._client.move()
                 self.sum_moves += 1
                 self._dest = -1
                 # setting the pokemon as cached

@@ -19,7 +19,7 @@ backg = pygame.transform.scale(backg, (screen.get_width(), screen.get_height()))
 screen.blit(backg, (0, 0))
 
 
-def draw_Frame(graph: GraphAlgo, moves, points, time):
+def draw_Frame(graph: GraphAlgo, moves, points, time, agents, pokemons):
     """
     The function drawing the basic frame, aka the graph and the stop button
     those items don't change the entire game.
@@ -36,6 +36,8 @@ def draw_Frame(graph: GraphAlgo, moves, points, time):
             draw_moves(moves)
             draw_points(points)
             draw_time_to_end(time)
+            draw_agent(agents)
+            draw_pokemon(pokemons)
             clock.tick(60)
             pygame.display.flip()
             backg = pygame.image.load("C:\\Users\hadar\OneDrive - Ariel University\Desktop\Ex4\img\\background.jpg")
@@ -149,7 +151,7 @@ def draw_agent(agents):
         This function responsible only to draw the agents
     """
     for agent in agents.values():
-        pygame.draw.circle(screen, Color(122, 61, 23), (int(agent.get_pos()[0]), int(agent.get_pos()[1])), 10)
+        pygame.draw.circle(screen, Color(122, 61, 23), (agent.get_pos()[0], agent.get_pos()[1]), 10)
 
 
 def draw_pokemon(pokemons):
