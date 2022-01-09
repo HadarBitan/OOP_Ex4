@@ -14,37 +14,28 @@ HOST = '127.0.0.1'
 client = Client()
 client.start_connection(HOST, PORT)
 
-client.add_agent("{\"id\":0}")
-# client.add_agent("{\"id\":1}")
-# client.add_agent("{\"id\":2}")
-# client.add_agent("{\"id\":3}")
-
-# agents_json = client.get_agents()
-# pokemons_json = client.get_pokemons()
 graph_json = client.get_graph()
 graph = GraphAlgo()
 graph.load_from_json(graph_json)
-# print(agents_json)
-# print(pokemons_json)
 
-agents = load_agents()
-# pokemons: dict = load_pokemon(pokemons_json)
-pokemons = load_pokemon()
-pokemon_check: dict = dict.fromkeys(pokemons.keys(), False)
-# print(agents)
-# print("end of agents")
-# print(pokemons)
-# print("end of pokemons")
 draw_Frame(graph)
 
-algorithms.first_init(agents_list=agents, pokemons_list=pokemons, pokemon_check=pokemon_check)
+pokemons = load_pokemon()
+pokemon_check: dict = dict.fromkeys(pokemons.keys(), False)
 
-
-client.start()
 points = 0
 moves = 0
-
+client.add_agent("{\"id\":0}")
+client.start()
+count = 0
+print("bye")
 while client.is_running() == 'true':
+    agents = load_agents()
+    pokemons = load_pokemon()
+    print("hi")
+    if count == 0:
+        algorithms.first_init(agents_list=agents, pokemons_list=pokemons, pokemon_check=pokemon_check)
+        count += 1
     draw_points(points)
     draw_moves(moves)
     draw_agent(agents=agents)
@@ -54,7 +45,5 @@ while client.is_running() == 'true':
     for agent in agents:
         points += agent.get_value()
         moves += agent.sum_moves
-    agents = load_agents()
-    pokemons = load_pokemon()
 
 # if __name__ == '__main__':
