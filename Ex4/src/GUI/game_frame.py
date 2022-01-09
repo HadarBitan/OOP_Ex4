@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), depth=32, flags=RESIZABLE)
 screen.fill(pygame.Color(40, 80, 100))
-backg = pygame.image.load("C:\\Users\hadar\OneDrive - Ariel University\Desktop\Ex4\img\\background.jpg")
+backg = pygame.image.load("../img/background.jpg")
 backg = pygame.transform.scale(backg, (screen.get_width(), screen.get_height()))
 screen.blit(backg, (0, 0))
 
@@ -40,7 +40,7 @@ def draw_Frame(graph: GraphAlgo, moves, points, time, agents, pokemons):
             draw_pokemon(pokemons, graph)
             clock.tick(60)
             pygame.display.flip()
-            backg = pygame.image.load("C:\\Users\hadar\OneDrive - Ariel University\Desktop\Ex4\img\\background.jpg")
+            backg = pygame.image.load("../img/background.jpg")
             backg = pygame.transform.scale(backg, (screen.get_width(), screen.get_height()))
             screen.blit(backg, (0, 0))
 
