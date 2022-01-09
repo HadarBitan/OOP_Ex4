@@ -1,2 +1,4 @@
 # OOP_Ex4
-The project represent a pokemon game.
+
+
+![pokemon-eevee-i32673](https://user-images.githubusercontent.com/86705118/148672730-90391a6a-5d3e-4313-a831-4eaad38ce107.jpg)
