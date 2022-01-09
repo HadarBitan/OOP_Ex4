@@ -140,7 +140,7 @@ def draw_agent(agents):
     """
         This function responsible only to draw the agents
     """
-    for agent in agents.values:
+    for agent in agents.values():
         pygame.draw.circle(screen, Color(122, 61, 23), (int(agent.get_pos()[0]), int(agent.get_pos()[1])), 10)
 
 
