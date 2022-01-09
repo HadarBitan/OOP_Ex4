@@ -1,6 +1,6 @@
-import GraphAlgo
+from src.Graph.GraphAlgo import GraphAlgo
 import main
-from Point3D import Point3D
+from src.Graph.Point3D import Point3D
 
 
 class Pokemon:
@@ -21,7 +21,6 @@ class Pokemon:
         self._pos: tuple = pos
         self._edge: tuple = ()
         self._find_edge()
-
 
     def get_value(self) -> float:
         """

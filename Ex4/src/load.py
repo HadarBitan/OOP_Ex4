@@ -3,7 +3,7 @@ from types import SimpleNamespace
 
 import main
 from Agent import Agent
-from Point3D import Point3D
+from src.Graph.Point3D import Point3D
 from Pokemon import Pokemon
 
 

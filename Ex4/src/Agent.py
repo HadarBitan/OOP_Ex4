@@ -1,5 +1,5 @@
 import main
-from Point3D import Point3D
+from src.Graph.Point3D import Point3D
 from Pokemon import Pokemon
 import threading
 

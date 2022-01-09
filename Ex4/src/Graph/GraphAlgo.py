@@ -3,7 +3,7 @@ import math
 from types import SimpleNamespace
 from typing import List
 
-from DiGraph import DiGraph
+from src.Graph.DiGraph import DiGraph
 from queue import PriorityQueue
 
 

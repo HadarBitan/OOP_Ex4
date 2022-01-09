@@ -1,5 +1,5 @@
-from NodeData import NodeData
-from Point3D import Point3D
+from src.Graph.NodeData import NodeData
+from src.Graph.Point3D import Point3D
 
 
 class DiGraph:

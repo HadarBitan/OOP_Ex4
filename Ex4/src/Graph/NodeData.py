@@ -1,4 +1,4 @@
-from Point3D import Point3D
+from src.Graph.Point3D import Point3D
 
 
 class NodeData:

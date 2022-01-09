@@ -1,7 +1,7 @@
 import pygame
 from pygame import RESIZABLE, Color
-from ui_elements import Button
-from GraphAlgo import GraphAlgo
+from src.GUI.ui_elements import Button
+from src.Graph.GraphAlgo import GraphAlgo
 
 
 WIDTH, HEIGHT = 1080, 800

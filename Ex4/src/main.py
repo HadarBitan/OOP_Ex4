@@ -1,7 +1,7 @@
 import algorithms
-from GraphAlgo import GraphAlgo
+from src.Graph.GraphAlgo import GraphAlgo
 from client import Client
-from game_frame import draw_Frame, draw_points, draw_agent, draw_pokemon, draw_moves
+from src.GUI.game_frame import draw_Frame, draw_points, draw_agent, draw_pokemon, draw_moves
 from load import load_agents, load_pokemon
 
 
