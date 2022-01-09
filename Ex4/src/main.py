@@ -26,6 +26,9 @@ points = 0
 moves = 0
 draw_Frame(graph, moves, points, client.time_to_end())
 client.add_agent("{\"id\":0}")
+client.add_agent("{\"id\":1}")
+client.add_agent("{\"id\":2}")
+client.add_agent("{\"id\":3}")
 client.start()
 count = 0
 while client.is_running() == 'true':
