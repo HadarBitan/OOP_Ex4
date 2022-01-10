@@ -3,7 +3,7 @@ from src.Pokemon import Pokemon
 # import threading
 
 
-class Agent():
+class Agent:
     """
     This class represent a single agent shown by:
     id -> an integer that can not be changed
@@ -25,8 +25,8 @@ class Agent():
         self._speed: float = speed
         self._pos: tuple = (float(pos[0]), float(pos[1]), float(pos[2]))
         self._pokemon = None
-        self.sum_moves = 0
-        self._client = client
+        # self.sum_moves = 0
+        # self._client = client
 
     def get_id(self) -> int:
         return self._id
@@ -89,20 +89,20 @@ class Agent():
     def set_pokemon(self, new_pokemon: Pokemon):
         self._pokemon = new_pokemon
 
-    def run(self) -> None:
-        EPS = 0.0000001
-        while True:
-            # sent the client to the dest of the edge of the pokemon
-            self._client.choose_next_edge(
-                '{"agent_id":' + str(self._id) + ', "next_node_id":' + str(self._pokemon.get_edge()[1]) + '}')
-            # only when the agent is very close to the pokemon act
-            point_pok = Point3D(self._pokemon.get_pos()[0], self._pokemon.get_pos()[1], self._pokemon.get_pos()[2])
-            point_self = Point3D(self._pos[0], self._pos[1], self._pos[2])
-            if point_self.distance(point_pok) <= EPS:
-                # final move to catch the pokemon
-                self._client.move()
-                self.sum_moves += 1
-                self._dest = -1
-                # setting the pokemon as cached
-                break
+    # def run(self) -> None:
+    #     EPS = 0.0000001
+    #     while True:
+    #         # sent the client to the dest of the edge of the pokemon
+    #         self._client.choose_next_edge(
+    #             '{"agent_id":' + str(self._id) + ', "next_node_id":' + str(self._pokemon.get_edge()[1]) + '}')
+    #         # only when the agent is very close to the pokemon act
+    #         point_pok = Point3D(self._pokemon.get_pos()[0], self._pokemon.get_pos()[1], self._pokemon.get_pos()[2])
+    #         point_self = Point3D(self._pos[0], self._pos[1], self._pos[2])
+    #         if point_self.distance(point_pok) <= EPS:
+    #             # final move to catch the pokemon
+    #             self._client.move()
+    #             self.sum_moves += 1
+    #             self._dest = -1
+    #             # setting the pokemon as cached
+    #             break
 
