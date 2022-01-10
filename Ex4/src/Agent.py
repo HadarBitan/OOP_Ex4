@@ -1,9 +1,9 @@
 from src.Graph.Point3D import Point3D
 from src.Pokemon import Pokemon
-import threading
+# import threading
 
 
-class Agent(threading.Thread):
+class Agent():
     """
     This class represent a single agent shown by:
     id -> an integer that can not be changed
@@ -17,7 +17,7 @@ class Agent(threading.Thread):
     """
 
     def __init__(self, agent_id: int, value: float, src: int, dest: int, speed: float, pos: tuple, client):
-        threading.Thread.__init__(self)
+        # threading.Thread.__init__(self)
         self._id: int = agent_id
         self._value: float = value
         self._src: int = src

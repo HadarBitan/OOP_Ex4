@@ -44,7 +44,7 @@ def time_to_catch(agent, pokemon) -> float:
     return distance / agent_speed
 
 
-def place_agent(agents_list: dict, pokemons_list: dict, pokemon_check: dict):
+def divide_pokemon(agents_list: dict, pokemons_list: dict, pokemon_check: dict):
     """
     The function place the agents according to the pokemons all over again after the agents catches their pokemon
     :param agents_list: the agent needs to be placed
@@ -62,27 +62,20 @@ def place_agent(agents_list: dict, pokemons_list: dict, pokemon_check: dict):
                 if tmp_time < best_time:
                     best_time = tmp_time
                     index_poke = poke
-        posOfPoke: tuple = pokemons_list[index_poke].get_pos()
-        src, dest = pokemons_list[index_poke].get_edge()
-        agents_list[id_agent].set_pos(posOfPoke)
-        agents_list[id_agent].set_src(src)
-        agents_list[id_agent].set_dest(dest)
+        # posOfPoke: tuple = pokemons_list[index_poke].get_pos()
+        # src, dest = pokemons_list[index_poke].get_edge()
+        # agents_list[id_agent].set_pos(posOfPoke)
+        # agents_list[id_agent].set_src(src)
+        # agents_list[id_agent].set_dest(dest)
         agents_list[id_agent].set_pokemon(pokemons_list[index_poke])
         pokemon_check[index_poke] = True
 
 
-def catch_pokemons(agents_list: dict):
+def catch_pokemons(agents_list: dict, client):
     """
     The function responsible to sent the agents to catch pokemon they assign to,
-    the function uses Multiple threads
     :return:
     """
-    threads = []
     for agent in agents_list.values():
-        agent.start()
-        threads.append(agent)
-        # ttl = main.client.time_to_end()
-        # print(ttl, main.client.get_info())
-        # draw_time_to_end(ttl)
-    for thread in threads:
-        thread.join()
+        client.choose_next_edge(
+            '{"agent_id":' + str(agent.get_id()) + ', "next_node_id":' + str(agent.get_pokemon().get_edge()[1]) + '}')
