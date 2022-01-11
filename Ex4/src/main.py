@@ -13,7 +13,8 @@ import random
 from Graph.GraphAlgo import GraphAlgo
 from pygame import *
 from algorithms import *
-from ui_elements import Button
+import time as t
+
 
 # init pygame
 WIDTH, HEIGHT = 1000, 600
@@ -204,6 +205,7 @@ while client.is_running() == 'true':
     choose_next_node(agents=agents, pokemons=pokemons, poke_data=poke_data, graph=graph,algo=algo, client=client)
     sleeper.sleep(0.09)
     client.move()
+    t.sleep(0.1)
 
 # game over:
 game_over(score, pygame=pygame, screen=screen, FONT=FONT, sleeper=sleeper, client=client)
